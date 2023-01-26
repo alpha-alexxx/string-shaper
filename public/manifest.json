@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "TextUtils",
+  "name": "TextUtils - TextUtils makes your text smart.",
   "icons": [
     {
       "src": "favicon.ico",
