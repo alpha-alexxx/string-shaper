@@ -34,7 +34,7 @@ export default function About(props) {
                 Text Utilities:
               </h1>
               <p className="lead">
-                TextUtils are a set of functions or methods that are used to manipulate text in various ways, such as converting text to uppercase, lowercase, titlecase, etc. These utilities are commonly used in web development to format text for display on a website or in an application.
+                Simple Text Utility are a set of functions or methods that are used to manipulate text in various ways, such as converting text to uppercase, lowercase, titlecase, etc. These utilities are commonly used in web development to format text for display on a website or in an application.
                 <span className="badge text-bg-info">This project is part of his learning process.</span>
               </p>
               <div className="d-grid gap-2 d-md-flex justify-content-md-start">
@@ -81,7 +81,7 @@ export default function About(props) {
                 data-bs-parent="#accordionExample"
               >
                 <div className="accordion-body" style={myStyle}>
-               <strong>Get your text manipulation needs sorted in a jiffy with TextUtils!</strong> With our powerful tool, you can easily convert text to uppercase, lowercase, and titlecase, remove special characters, count words, and get the fast, slow, and average reading time. Plus, you can copy the text to clipboard with a single click to share it with others. Get your writing & editing done faster & easier - try TextUtils today!
+               <strong>Get your text manipulation needs sorted in a jiffy with Simple Text Utility!</strong> With our powerful tool, you can easily convert text to uppercase, lowercase, and titlecase, remove special characters, count words, and get the fast, slow, and average reading time. Plus, you can copy the text to clipboard with a single click to share it with others. Get your writing & editing done faster & easier - try Simple Text Utility today!
                 </div>
               </div>
             </div>

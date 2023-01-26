@@ -1,6 +1,6 @@
-# TextUtils
+# Simple Text Utility
 
-TextUtils is a text editing application built with React.js. It provides a variety of tools to help you manipulate and analyze text.
+Simple Text Utility is a text editing application built with React.js. It provides a variety of tools to help you manipulate and analyze text.
 
 ## Features
 - Convert text to uppercase or lowercase
@@ -11,7 +11,7 @@ TextUtils is a text editing application built with React.js. It provides a varie
 - About page, contact us page and home page
 
 ## Dependencies
-TextUtils is built using the following dependencies:
+Simple Text Utility is built using the following dependencies:
 - React.js
 - React-router-dom
 - React-transition-group
@@ -19,7 +19,7 @@ TextUtils is built using the following dependencies:
 - Testing libraries like @testing-library/jest-dom, @testing-library/react, @testing-library/user-event
 
 ## Getting Started
-To get started with TextUtils, clone the repository and install the dependencies using npm or yarn:
+To get started with Simple Text Utility, clone the repository and install the dependencies using npm or yarn:
 
 `npm install` or `yarn install`
 
@@ -40,7 +40,7 @@ The application will be running on http://localhost:3000.
 
 
 ## Contributions
-We welcome contributions to TextUtils. If you have an idea for a new feature or have found a bug, please open an issue or submit a pull request.
+We welcome contributions to Simple Text Utility. If you have an idea for a new feature or have found a bug, please open an issue or submit a pull request.
 
 ## License
-TextUtils is licensed under the MIT License.
+Simple Text Utility is licensed under the MIT License.

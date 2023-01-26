@@ -1,6 +1,6 @@
 {
-  "short_name": "TextUtils",
-  "name": "TextUtils - TextUtils makes your text smart.",
+  "short_name": "Simple Text Utility",
+  "name": "Simple Text Utility - Simple Text Utility makes your text smart.",
   "icons": [
     {
       "src": "favicon.ico",

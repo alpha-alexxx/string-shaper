@@ -18,9 +18,9 @@ function App() {
     if (location.pathname === "/") {
       document.title = "Home - Tools | UpperCase | LowerCase | TitleCase | Remove Extra Spaces";
     } else if (location.pathname === "/about") {
-      document.title = "About - TextUtils Description";
+      document.title = "About - Simple Text Utility Description";
     } else if (location.pathname === "/contact") {
-      document.title = "TextUtils - Contact Us";
+      document.title = "Simple Text Utility - Contact Us";
     }
   }, [location]);
   const toggleMode = () => {
@@ -51,7 +51,7 @@ function App() {
   return (
     <>
       <Navbar
-        title="TextUtils"
+        title=""
         mode={mode}
         toggleMode={toggleMode}
       />
@@ -73,7 +73,7 @@ function App() {
         <Route exact path="/about" element={<About mode={mode} />} />
         <Route exact path="/contact" element={<Contact mode={mode} />} />
       </Routes>
-      <Footer mode={mode} title="TextUtils"
+      <Footer mode={mode} title="Simple Text Utility"
       />
     </>
   );
