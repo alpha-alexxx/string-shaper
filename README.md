@@ -32,7 +32,7 @@ Then, start the development server with:
 The application will be running on http://localhost:3000.
 
 ##  Current Live on:
-[![Visit My Site](https://www.netlify.com/img/deploy/button.svg)](https://simpletextutility.netlify.app/)
+[![Visit My Site](https://svgshare.com/i/pq0.svg)](https://simpletextutility.netlify.app/)
 
 ## Authors
 
