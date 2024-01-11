@@ -30,7 +30,7 @@ const Contact = () => {
           Are you passionate about open-source development or looking for skilled developers to bring your projects to life? We&#39;re excited to hear from you! Whether you&#39;re interested in contributing to our open-source initiatives or seeking our development services, feel free to reach out.At [Lethargic Solutions] , we believe in collaboration, innovation, and delivering exceptional results.Let&#39;s connect and explore how we can work together to achieve great things.
         </p>
       </div>
-      <form onSubmit={handleSubmit(onSubmit)} className="mx-auto mt-16 max-w-xl sm:mt-20" netlify='true'>
+      <form onSubmit={handleSubmit(onSubmit)} className="mx-auto mt-16 max-w-xl sm:mt-20" action='/netlify/functions/sendMail'>
         <div className="grid grid-cols-1 gap-x-8 gap-y-6">
           {/* Name */}
           <div className="sm:col-span-2">
