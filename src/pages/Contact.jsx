@@ -1,19 +1,61 @@
-import { EnvelopeIcon } from '@heroicons/react/24/solid'
+import { ArrowPathIcon, EnvelopeIcon } from '@heroicons/react/24/solid'
 import { render } from '@react-email/render';
 import { useForm } from 'react-hook-form'
-
-
+import axios from 'axios';
+import Email from '../components/Email'
+import { useState } from 'react';
+import Notification from '../components/Notification';
 const Contact = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm()
+  const [show, setShow] = useState(false)
+  const [information, setInformation] = useState({
+    type: '',
+    title: '',
+    body: ''
+  })
+  const [isSending, setSending] = useState(false)
+  const { register, handleSubmit, watch, formState: { errors } } = useForm()
   const onSubmit = async (data) => {
+    const { name, email, subject } = data
+    const message = render(<Email data={data} key='Mail From String Shaper' />);
+    try {
+      setSending(true)
+      const response =
+        await axios
+          .post('/api/v1/send-mail', {
+            name,
+            website: 'String Shaper',
+            email,
+            subject,
+            message
+          })
+      const { title, body, type } = response.data
+      setInformation({
+        type: type,
+        title: title,
+        body: body
+      })
+    } catch (err) {
+      console.log(err)
+      setInformation({
+        type: 'error',
+        title: err.message,
+        body: `Mr. ${watch('name')}, We got an Server Error. Please try again.`
+      })
+    } finally {
+      setSending(false)
+      setShow(true)
 
-    console.log(data)
-
+      setTimeout(() => {
+        setShow(false)
+        setInformation({ type: '', title: '', body: '' })
+      }, 5000);
+    }
   }
+
   return (
     <div className="isolate bg-white px-6 py-12 sm:py-12 lg:px-8">
       <div
-        className="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
+        className="absolute inset-x-0 top-[-10rem] z-[-10] transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
         aria-hidden="true"
       >
         <div
@@ -35,30 +77,50 @@ const Contact = () => {
           {/* Name */}
           <div className="sm:col-span-2">
             <label htmlFor="first-name" className="block text-lg font-semibold leading-6 text-gray-900">
-              Your name {errors.name ? <sup className='text-sm font-normal text-red-500'>*{errors.name?.message}</sup> : ''}
+              Your name {errors.name ? <sup className='text-sm font-normal text-red-500'>*{errors.name?.message}</sup> : <span className='text-xl font-bold text-red-500' title='required'>*</span>}
             </label>
             <div className="mt-2.5">
               <input
                 type="text"
                 id="first-name"
                 autoComplete="given-name"
+                placeholder='Ankit Kumar'
                 {...register('name', { required: 'Your Name is required' })}
                 className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-lg sm:leading-6"
               />
             </div>
           </div>
+
           {/* Email */}
           <div className="sm:col-span-2">
             <label htmlFor="email" className="block text-lg font-semibold leading-6 text-gray-900">
-              Email {errors.email ? <sup className='text-sm font-normal text-red-500'>*{errors.email?.message}</sup> : ''}
+              Email {errors.email ? <sup className='text-sm font-normal text-red-500'>*{errors.email?.message}</sup> : <span className='text-xl font-bold text-red-500' title='required'>*</span>}
             </label>
             <div className="mt-2.5">
               <input
                 type="email"
                 id="email"
                 autoComplete="email"
+                placeholder='1243@example.com'
                 {...register('email', { required: "Email Address is required" })}
                 aria-invalid={errors.email ? "true" : "false"}
+                className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-lg sm:leading-6"
+              />
+            </div>
+          </div>
+          {/* Subject */}
+          <div className="sm:col-span-2">
+            <label htmlFor="subject" className="block text-lg font-semibold leading-6 text-gray-900">
+              Email Subject: {errors.subject ? <sup className='text-sm font-normal text-red-500'>*{errors.subject?.message}</sup> : <span className='text-xl font-bold text-red-500' title='required'>*</span>}
+            </label>
+            <div className="mt-2.5">
+              <input
+                type="subject"
+                id="subject"
+                placeholder='Enter email subject here...'
+                autoComplete="email"
+                {...register('subject', { required: "Subject is required", minLength: { value: 10, message: 'Subject field can not be less than 10 characters.' } })}
+                aria-invalid={errors.subject ? "true" : "false"}
                 className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-lg sm:leading-6"
               />
             </div>
@@ -66,29 +128,46 @@ const Contact = () => {
           </div>
           <div className="sm:col-span-2">
             <label htmlFor="comment" className="block text-lg font-semibold leading-6 text-gray-900">
-              Message {errors.comment ? <sup className='text-sm font-normal text-red-500'>*{errors.comment?.message}</sup> : ''}
+              Message {errors.comment ? <sup className='text-sm font-normal text-red-500'>*{errors.comment?.message}</sup> : <span className='text-xl font-bold text-red-500' title='required'>*</span>}
             </label>
             <div className="mt-2.5">
               <textarea
                 name="comment"
                 id="comment"
+                placeholder='Write your message here...(Min. 40 character Max.: 500 Character)'
                 rows={4}
-                {...register('comment', { required: 'Message is required', minLength: { value: 100, message: 'Message must be at least 100 characters.' }, maxLength: { value: 500, message: 'Message field can not exceed 500 characters.' } })}
+                {...register('comment', { required: 'Message is required', minLength: { value: 40, message: 'Message must be at least 100 characters.' }, maxLength: { value: 500, message: 'Message field can not exceed 500 characters.' } })}
                 className="block resize-none w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-lg sm:leading-6"
               />
+              <p className='text-right text-slate-500 font-medium text-sm'>{watch('comment') ? watch('comment')?.length : 0}/500</p>
             </div>
           </div>
         </div>
         <div className="mt-10">
           <button
             type="submit"
-            className="flex items-center justify-center gap-1 w-auto md:ml-auto rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-lg font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            className="flex flex-row items-center justify-center gap-1 w-auto md:ml-auto rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-lg font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
-            <EnvelopeIcon className='w-6 h-6' />
-            Send Mail
+            {
+              isSending ?
+                <span className='flex items-center justify-center'>
+                  <ArrowPathIcon className='w-6 h-6 animate-spin font-bold' />
+                  Sending...
+                </span>
+                : <span className='flex items-center justify-center'>
+                  <EnvelopeIcon className='w-6 h-6' />
+                  Send Mail
+                </span>
+            }
+
           </button>
         </div>
       </form>
+      {isSending && <p className='bg-slate-500/50 fixed inset-0 justify-center flex items-center font-extrabold text-2xl text-slate-900'>
+        <ArrowPathIcon className='w-10 h-10 animate-spin' />
+        Sending...
+      </p>}
+      <Notification show={show} setShow={setShow} information={information} />
     </div>
   )
 }

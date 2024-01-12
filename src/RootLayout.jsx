@@ -6,7 +6,9 @@ const RootLayout = () => {
   return (
     <>
       <Navbar data={navData} />
-      <Outlet />
+      <main className='mt-16'>
+        <Outlet />
+      </main>
     </>
   )
 }

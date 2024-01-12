@@ -1,40 +1,38 @@
-import { Fragment } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, BellIcon, SunIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Disclosure } from '@headlessui/react'
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Logo from '../assets/Logo'
-import { NavLink } from 'react-router-dom'
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
+import { NavLink, Link } from 'react-router-dom'
+
 
 export default function Navbar({ data }) {
   return (
-    <Disclosure as="nav" className="bg-primary">
+    <Disclosure as="nav" className="bg-primary/90 fixed h-16 top-0 left-0 w-full z-[10]">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex h-16 items-center justify-between">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <Logo
-                    className="block h-8 w-auto lg:hidden"
-                    alt="String Shaper"
-                    color='#fff'
-                  />
+                  <Link to='/'>
+                    <Logo
+                      className="block h-8 w-auto lg:hidden"
+                      alt="String Shaper"
+                      color='#fff'
+                    />
+                    <Logo
+                      className="hidden h-8 w-auto lg:block"
+                      alt="String Shaper"
+                      color='#fff'
+                    />
 
-                  <Logo
-                    className="hidden h-8 w-auto lg:block"
-                    alt="String Shaper"
-                    color='#fff'
-                  />
-
+                  </Link>
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
 
                     {data.map(navItem => (
                       <NavLink key={navItem.name} to={navItem.path}
-                        className={({ isActive, isPending, isTransitioning }) => isActive ? 'border-b-4 block border-secondary text-white px-3 py-2 text-sm font-medium' : 'text-gray-300 hover:border-b-4 border-secondary/50 px-3 py-2 text-sm font-medium'
+                        className={({ isActive }) => isActive ? 'border-b-4 block border-secondary text-white px-3 py-2 text-sm font-medium' : 'text-gray-300 hover:border-b-4 border-secondary/50 px-3 py-2 text-sm font-medium'
                         }
                       >
                         {navItem.name}

@@ -1,4 +1,3 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
 import Logo from '../assets/Logo'
 const ABOUT_DATA = {
@@ -62,6 +61,18 @@ const ABOUT_DATA = {
       description: 'A set of completely unstyled, fully accessible UI components, designed to integrate with Tailwind CSS and other CSS frameworks.',
       svgBadge: 'https://img.shields.io/badge/Headless_UI-blue?style=for-the-badge&logo=headlessui',
       website: 'https://headlessui.com/'
+    },
+    {
+      name: 'React Form Hook',
+      description: 'React Hook Form is a lightweight React library for form management using hooks, emphasizing efficient validation and performance. It simplifies complex form states and integrates seamlessly with React components.',
+      svgBadge: 'https://img.shields.io/badge/React_Hook_Form-000?style=for-the-badge&logo=react-hook-form&logoColor=FF5BCB',
+      website: 'https://headlessui.com/'
+    },
+    {
+      name: 'React Email',
+      description: 'A collection of high-quality, unstyled components for creating beautiful emails using React and TypeScript.',
+      svgBadge: 'https://img.shields.io/badge/React_Email-000?style=for-the-badge&logo=react&logoColor=white',
+      website: 'https://react.email/'
     }
   ]
 };
