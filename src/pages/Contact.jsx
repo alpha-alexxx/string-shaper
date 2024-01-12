@@ -21,7 +21,7 @@ const Contact = () => {
       setSending(true)
       const response =
         await axios
-          .post('/api/v1/send-mail', {
+          .post('https://mailer-ss8b.onrender.com/api/v1/send-mail', {
             name,
             website: 'String Shaper',
             email,
