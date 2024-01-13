@@ -84,10 +84,12 @@ const About = () => {
     <div className="w-full px-4 md:px-6 lg:px-8 py-8 md:py-10 lg:py-12 ">
       <h1 className="my-3 text-3xl font-bold md:text-5xl">About Us:</h1>
       <hr />
-      <div className="container flex flex-col justify-center items-stretch" >
-        <div className="flex flex-col md:flex-row-reverse items-center py-5">
-          <img className='w-[30rem] rounded-xl shadow-md' src='https://iili.io/J7WUkHx.webp' alt='string shaper' />
-          <div className="flex flex-col items-center justify-center  gap-4 mt-8 md:mt-2">
+      <div className="flex flex-col justify-center items-center" >
+        <div className="grid  md:grid-cols-2 justify-center items-center py-5 gap-2 h-full">
+
+          <img className='w-[20rem]  order-1 md:order-2 sm:w-[24rem] md:w-[28rem] lg:w-[32rem] mx-auto rounded-xl shadow-md' src='https://iili.io/J7WUkHx.webp' alt='string shaper' />
+
+          <div className="order-2 md:order-1 flex flex-col items-center justify-center  gap-4 mt-8 md:mt-2">
             <div className='flex flex-row gap-2'>
               <p className="inline-flex items-center rounded-md btn-primary px-2 py-1 text-[14px] font-medium text-white ring-1 ring-inset ring-gray-400/10">Ankit Kumar - Student/Web Developer</p>
               <p className="inline-flex items-center rounded-md bg-secondary px-2 py-1 text-[14px] font-medium text-black ring-1 ring-inset ring-pink-700/10">First Project</p>
@@ -100,6 +102,7 @@ const About = () => {
             </p>
             <span className="inline-flex items-center rounded-md bg-primary px-2 py-1 text-base font-medium text-white ring-1 ring-inset ring-pink-700/10">This project is part of his learning process.</span>
           </div>
+
         </div>
         {/*  */}
         <div>

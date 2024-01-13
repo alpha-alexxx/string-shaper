@@ -1,9 +1,10 @@
 import { ArrowPathIcon, EnvelopeIcon } from '@heroicons/react/24/solid'
 import { useForm } from 'react-hook-form'
 import axios from 'axios';
+import { renderToStaticMarkup } from 'react-dom/server';
 import { useState } from 'react';
-import { Notification, Email } from '../components';
-import { render } from '@react-email/render';
+import { Notification, EmailTemplate } from '../components';
+
 const Contact = () => {
   const [show, setShow] = useState(false)
   const [information, setInformation] = useState({
@@ -14,13 +15,8 @@ const Contact = () => {
   const [isSending, setSending] = useState(false)
   const { register, handleSubmit, watch, formState: { errors }, } = useForm()
   const onSubmit = async (data) => {
-    const { name, email, subject } = data
-    const message =
-      render(
-        <Email data={data} key={data.name} />, { pretty: true }
-      )
-    console.log(message)
-
+    const { name, email, subject, } = data
+    const message = renderToStaticMarkup(<EmailTemplate {...data} />)
     try {
       setSending(true)
       const response =
@@ -30,7 +26,7 @@ const Contact = () => {
             website: 'String Shaper',
             email,
             subject,
-            message
+            message: message
           })
       const { title, body, type } = response.data
       setInformation({
@@ -80,9 +76,9 @@ const Contact = () => {
         </div>
         <form onSubmit={handleSubmit(onSubmit)} className="mx-auto w-full md:max-w-xl" action='/netlify/functions/sendMail'>
           <div className="grid grid-cols-1 gap-y-6 w-full">
-            <div className="grid md:grid-cols-2  gap-x-2 ">
+            <div className="grid md:grid-cols-2  gap-x-2">
               {/* Name */}
-              <div className="">
+              <div className="sm:col-span-2 md:col-span-1 w-full">
                 <label htmlFor="first-name" className="block text-lg font-semibold leading-6 text-gray-900">
                   Your name {errors.name ? <sup className='text-sm font-normal text-red-500'>*{errors.name?.message}</sup> : <span className='text-xl font-bold text-red-500' title='required'>*</span>}
                 </label>
@@ -173,10 +169,15 @@ const Contact = () => {
         </form>
       </div>
 
-      {isSending && <p className='bg-slate-500/50 fixed inset-0 justify-center flex items-center font-extrabold text-2xl text-slate-900'>
-        <ArrowPathIcon className='w-10 h-10 animate-spin' />
-        Sending...
-      </p>}
+      {isSending &&
+        <>
+          <p className='bg-slate-500/50 fixed inset-0 justify-center flex items-center font-extrabold text-2xl text-slate-900'>
+            <ArrowPathIcon className='w-10 h-10 animate-spin' />
+            Sending...
+          </p>
+
+        </>
+      }
       <Notification show={show} setShow={setShow} information={information} />
     </div>
   )
