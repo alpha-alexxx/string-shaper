@@ -1,34 +1,57 @@
-import { Html, Head, Tailwind } from "@react-email/components";
-const Email = ({ data }) => {
-  const { name, email, subject, comment, } = data
+import {
+  Body,
+  Container,
+  Head,
+  Heading,
+  Html,
+  Img,
+  Preview,
+  Section,
+  Tailwind,
+  Text,
+} from '@react-email/components';
+import { useId } from 'react';
+
+
+
+export const Email = ({ data: { name, email, subject, comment, website = 'String Shaper' } }) => {
   return (
-
-    <Html lang="en" dir="ltr">
-      <Head>
-        <title>{'Message From StringShaper'}</title>
-      </Head>
+    <Html>
+      <Head />
+      <Preview>{`Message From ${website}, sent by ${name}`}</Preview>
       <Tailwind>
-        <div className="bg-gray-100/80 rounded-md border-2 border-gray-300/30 shadow-md p-2 break-words">
-          <h3 className="text-lg font-[800] font-[Urbanist] text-gray-400">
-            Sender name: <span className='text-gray-800'>{name}</span>
-          </h3>
-          <h3 className="text-lg font-[800] font-[Urbanist] text-gray-400">
-            From: <span className='text-gray-800'>{email}</span>
-          </h3>
-          <h4 className="text-lg font-[800] font-[Urbanist] text-gray-400">
-            Subject: <span className='text-gray-800'>{subject}</span>
-          </h4>
-          <section className='font-medium text-lg break-words font-[Urbanist]'>
-            <p>{comment}</p>
-          </section>
-          <footer className='w-full flex text-center font-bold text-green-500'>
-            <p className='text-center'>❤️ Mail From String Shaper ❤️</p>
-          </footer>
-        </div>
+        <Body className="bg-white my-auto mx-auto font-sans">
+          <Container className="border-2 bg-neutral-100 border-solid border-neutral-300 rounded-md my-[40px] mx-auto p-[20px] max-w-3xl shadow-xl">
+            <Section className="mt-8">
+              <Img
+                src={`https://iili.io/JYd1hMv.md.png`}
+                alt={website}
+                className="w-40 my-0 mx-auto"
+              />
+            </Section>
+            <Heading className="text-black text-base text-center p-0 my-[30px] mx-0 font-bold">
+              {subject.charAt(0).toUpperCase() + subject.slice(1)}
+            </Heading>
+            <Text className="text-black text-sm leading-[24px]">
+              Sender Name: <strong>{name}</strong>
+            </Text>
+            <Text className="text-black text-sm leading-[24px]">
+              Sender Email: <strong>{email}</strong>
+            </Text>
+            <Text className="text-black text-lg font-normal leading-[24px] p-2">
+              {comment.charAt(0).toUpperCase() + comment.slice(1)}
+            </Text>
+            <Section className='mt-4'>
+              <footer className='w-full text-center font-[urbanist] text-base'>
+                ❤️ Email from <strong>{website.toUpperCase()}</strong> ❤️
+              </footer>
+            </Section>
+          </Container>
 
+        </Body>
       </Tailwind>
     </Html>
-  )
-}
+  );
+};
 
-export default Email
+export default Email;

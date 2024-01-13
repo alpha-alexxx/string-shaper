@@ -140,23 +140,18 @@ const About = () => {
                 <th scope="col" className="px-3 py-3.5 font-semibold text-gray-900">
                   Description
                 </th>
-                <th scope="col" className="py-3.5 pl-4 pr-3  font-semibold text-gray-900 sm:pl-6">
-                  Official Website
-                </th>
+
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200 bg-white">
               {ABOUT_DATA.technologies.map(tech => (
                 <tr key={tech.name} className='text-lg  text-left divide-x divide-gray-400'>
-                  <td className="whitespace-nowrap py-4 pl-4 pr-3 font-bold text-gray-900 sm:pl-6">
-                    {tech.name}
-                  </td>
-                  <td className="break-words px-3 py-4 text-gray-500">{tech.description}</td>
                   <td className="whitespace-nowrap mx-auto px-3 py-4 text-gray-500">
                     <Link to={tech.website} target="_blank" className='active:scale-95'>
                       <img src={tech.svgBadge} alt={tech.name} className='h-8 w-32 rounded shadow-md active:scale-95' />
                     </Link>
                   </td>
+                  <td className="break-words px-3 py-4 text-gray-500">{tech.description}</td>
                 </tr>
               ))}
             </tbody>

@@ -6,7 +6,7 @@ import { NavLink, Link } from 'react-router-dom'
 
 export default function Navbar({ data }) {
   return (
-    <Disclosure as="nav" className="bg-primary/90 fixed h-16 top-0 left-0 w-full z-[10]">
+    <Disclosure as="nav" className="bg-primary z-50 fixed h-16 top-0 left-0 w-full">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -57,20 +57,24 @@ export default function Navbar({ data }) {
             </div>
           </div>
 
-          <Disclosure.Panel className="sm:hidden">
-            <div className="space-y-1 px-2 pb-3 pt-2">
-              {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
-              {data.map(navItem => (
-                <NavLink
-                  to={navItem.path}
-                  key={navItem.name}
-                  className={({ isActive }) => isActive ? 'border-l-4 border-secondary bg-secondary/20 text-white block rounded-md px-3 py-2 text-base font-medium' : 'text-gray-300 block rounded-md px-3 py-2 text-base font-medium'
-                  }
-                >
-                  {navItem.name}
-                </NavLink>
-              ))}
-            </div>
+          <Disclosure.Panel className="sm:hidden bg-primary">
+            {({ close }) => (
+              <div className="space-y-1 px-2 pb-3 pt-2  z-[50]">
+                {
+                  data.map(navItem => (
+                    <NavLink
+                      to={navItem.path}
+                      key={navItem.name}
+                      className={({ isActive }) => isActive ? 'border-l-4 border-secondary bg-secondary/20 text-white block rounded-md px-3 py-2 text-base font-medium' : 'text-gray-300 block rounded-md px-3 py-2 text-base font-medium'
+                      }
+                      onClick={() => close()}
+                    >
+                      {navItem.name}
+                    </NavLink>
+                  ))
+                }
+              </div>
+            )}
           </Disclosure.Panel>
         </>
       )
